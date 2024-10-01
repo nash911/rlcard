@@ -45,11 +45,11 @@ class Env(object):
         # A counter for the timesteps
         self.timestep = 0
 
-        # Set random seed, default is None
-        self.seed(config['seed'])
+        # # Set random seed, default is None
+        # self.seed(config['seed'])
 
 
-    def reset(self):
+    def reset(self, seed: int = None):
         ''' Start a new game
 
         Returns:
@@ -58,6 +58,9 @@ class Env(object):
                 (numpy.array): The begining state of the game
                 (int): The begining player
         '''
+        # Reset the seed for the episode
+        self.seed(seed)
+
         state, player_id = self.game.init_game()
         self.action_recorder = []
         return self._extract_state(state), player_id
